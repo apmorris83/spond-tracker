@@ -6,6 +6,7 @@ const data = [ // app data structure
     {section:'personal',row:'squash',amount:2,note:'Light money',date:'2019-07-05T18:38:17.792Z'},
     {section:'blackRio',row:'petrol',amount:35.01,note:'Asda',date:'2019-07-05T18:38:17.792Z'},
 ];
+const oldHistory = '[{"section":"home","row":"mortgageOverPayment","month":0,"amount":400,"note":"","date":"2019-01-01T15:37:19.842Z"},{"section":"food","row":"shopping","month":0,"amount":7.7,"note":"Asda","date":"2019-01-01T15:37:20.842Z"},{"section":"personal","row":"squash","month":0,"amount":44.47,"note":"Artengo SR 960 racket and sweatbands","date":"2019-01-01T15:45:20.465Z"}]';
 const getUniqueBy = (arr,val) => { // helper function
     return arr.reduce((acc,cur) => {
         if(acc.indexOf(cur[val]) < 0) acc.push(cur[val]);
@@ -80,4 +81,17 @@ const buildDataForRendering = () => { // build an array of sections, which has a
     })
     
 }
-console.log(JSON.stringify(buildDataForRendering()))
+const convertOldHistory = (history) => {
+    const historyData = JSON.parse(history).map(ent => {
+       return {
+           section:ent.section,
+           row:ent.row,
+           amount:ent.amount,
+           note:ent.note,
+           date:ent.date
+       }
+   });
+   return JSON.stringify(historyData);
+}
+console.log(JSON.stringify(buildDataForRendering()));
+// console.log(convertOldHistory(oldHistory));
