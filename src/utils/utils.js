@@ -42,9 +42,10 @@ const getSectionTotals = (rows) => { // helper function
     }).reduce((r,a) => r.map((b,i) => a[i] + b)) // this adds all the arrays together
 }
 const getRowTotal = (row) => row.reduce((acc,cur) => Array.isArray(cur) ? acc + cur.reduce((ac,cu) => ac + cu.amount,0) : acc + cur,0); // helper function
-const getSections = () => getUniqueBy(data,'section'); // get sections for the history filters and the toolbar
-const getRowsBySection = (section) => getUniqueBy(data.filter(ent => ent.section === section),'row'); // get rows by section for the history filters and the toolbar
-const filterData = (filters) => { // filter data by section, row, month and year
+// const getYears = () => getUniqueBy(data)
+export const getSections = () => getUniqueBy(data,'section'); // get sections for the history filters and the toolbar
+export const getRowsBySection = (section) => getUniqueBy(data.filter(ent => ent.section === section),'row'); // get rows by section for the history filters and the toolbar
+export const filterData = (filters) => { // filter data by section, row, month and year
     return data.filter(ent => {
         const bySection = filters.section === 'all' ? true : ent.section === filters.section;
         const byRow = filters.row === 'all' ? true : ent.row === filters.row;
